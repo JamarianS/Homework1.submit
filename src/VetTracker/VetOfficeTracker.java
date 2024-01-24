@@ -28,6 +28,8 @@ public class VetOfficeTracker {
 
     private void addNewPet() {
         Scanner scanner = new Scanner(System.in);
+
+        // Get user input for the new pet's information
         System.out.print("Enter the name of the new pet: ");
         String name = scanner.nextLine();
 
@@ -41,7 +43,8 @@ public class VetOfficeTracker {
         System.out.print("Enter the type of the new pet: ");
         String petType = scanner.nextLine();
 
-        Pet newPet = new Pet(name, ownerName, age, petType);
+        // Create a new Pet object with the entered information
+         Pet newPet = new Pet(name, ownerName, age, petType);
         petList.add(newPet);
 
         System.out.println("New pet added:");
@@ -62,10 +65,13 @@ public class VetOfficeTracker {
             String choice = scanner.nextLine().toLowerCase();
 
             if ("find".equals(choice)) {
+                // Get user input for the new pet's information
                 System.out.print("Enter the name of the pet you want to find: ");
                 String nameToFind = scanner.nextLine();
                 Pet foundPet = findPetByName(nameToFind);
                 if (foundPet != null) {
+                    // Display information of the found pet
+
                     foundPet.displayInfo();
                 } else {
                     System.out.println("Pet with name " + nameToFind + " not found.");
@@ -77,9 +83,12 @@ public class VetOfficeTracker {
                 deletePetByName(nameToDelete);
 
             } else if ("add".equals(choice)) {
+                // Call the method to add a new pet
                 addNewPet();
 
             } else if ("exit".equals(choice)) {
+                // Save changes to file and exit the program
+
                 saveChangesToFile();
                 System.out.println("Changes saved. Exiting the program.");
                 break;
@@ -91,28 +100,36 @@ public class VetOfficeTracker {
     }
 
     /** Method: findAndDeletePets
-     * Ask the user to pick between finding,deleting,
-     * adding a pet, or exiting
-     * @return The corresponding methods based on the user's choice
-     *
+     * Prompts the user to choose between finding, deleting, adding a pet, or exiting.
+     * Executes corresponding operations based on user input.
+     * If 'find' is chosen, prompts the user for the pet name and displays the pet if found.
+     * If 'delete' is chosen, prompts the user for the pet name and deletes the pet if found.
+     * If 'add' is chosen, calls the addNewPet() method to add a new pet to the petList.
+     * If 'exit' is chosen, saves changes to the file and exits the program.
      */
 
     private Pet findPetByName(String name) {
         for (Pet pet : petList) {
+            // Compare pet names, ignoring case and leading/trailing spaces
             if (pet.getName().trim().equalsIgnoreCase(name.trim()) || pet.getName().trim().equalsIgnoreCase("\"" + name.trim() + "\"")) {
                 return pet;
             }
         }
+        // Return null if no matching pet is found
         return null;
     }
-    /** Method: findPetByName
-     * Searches for a pet by name in the petList
-     * @return The first match
+    /**
+     * Method findPetByName
+     * Searches for a pet by name in the petList.
+     * Comparison is case-insensitive and ignores leading/trailing spaces and quotes.
+     * @param name The name of the pet to find.
+     * @return The first matching Pet object found, or null if no match is found.
      */
 
 
     private void deletePetByName(String name) {
         Pet petToDelete = findPetByName(name);
+        //Remove pet form the petLIst
         if (petToDelete != null) {
             petList.remove(petToDelete);
             System.out.println(name + " has been deleted.");
@@ -122,13 +139,17 @@ public class VetOfficeTracker {
     }
 
     /** Method: deletePetByName
-     * Deletes a pet by name from the petList
+     * Deletes a pet by name from the petList.
+     * Calls the findPetByName method to locate the pet.
+     * If the pet is found, it is removed from the petList.
+     * Prints a message indicating the deletion status.
+     *  name of the pet to delete.
      */
-
 
     private void saveChangesToFile() {
         try (FileWriter writer = new FileWriter("clientsForPet.txt")) {
             for (Pet pet : petList) {
+                // Write pet information to the file
                 writer.write(pet.getName() + "," + pet.getOwnerName() + "," + pet.getAge() + "," + pet.getPetType() + "\n");
             }
         } catch (IOException e) {
@@ -141,7 +162,11 @@ public class VetOfficeTracker {
     /** Method: saveChangesToFile
      * Writes the information of all pets in the petList
      * to a file("clientsForPet.txt")
-          */
+     Each line in the file represents a pet's information including name, owner name, age, and pet type.
+     * The information is written in CSV (Comma-Separated Values) format.
+     * If an IOException occurs during the file writing, the stack trace is printed, and an error message is displayed.
+     * After the operation, a message is printed indicating the successful save operation.
+     */
 
 
 
@@ -158,7 +183,8 @@ public class VetOfficeTracker {
     }
     /** Method: printClientsFileContent
      * Read and prints the context in the "clientsForPet.txt" File
-     * @return The context within the file clientsForPet.txt
+     Displays each line of the file to the console.
+     * If the file is not found, prints an error message indicating the exception details.
      */
 
 
@@ -222,7 +248,7 @@ public class VetOfficeTracker {
 
         /** Method: main
          * Creates an instance of VetOfficeTracker, reads pet info from file
-         * , displayes pet list, allows uer to find and delete pets
+         * , displays pet list, allows uer to find and delete pets
          * @return Updated content of file
          */
     }
