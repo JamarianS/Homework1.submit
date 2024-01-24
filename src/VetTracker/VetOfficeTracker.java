@@ -52,7 +52,10 @@ public class VetOfficeTracker {
     }
 
     /** Method: addNewPet
-     * Prompts the user to enter to information
+     * Prompts the user to enter information for a new pet.
+     * Asks for the new pet's name, owner's name, age, and type.
+     * Creates a new Pet object with the entered information and adds it to the petList.
+     * Displays a message confirming the addition of the new pet and prints its information.
      */
 
 
