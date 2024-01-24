@@ -1,0 +1,10 @@
+
+Buddy,John,3,dog,Labrador,Golden
+Max,Susan,2,dog,Beagle,Brown
+
+Whiskers,Robert,4,Cat,Short,Clawed,Black
+Mittens,Alice,1,Cat,Long,Declawed,White
+
+
+Slinky,Chris,2,Snake,false
+Tweety,Emma,1,Bird,True
